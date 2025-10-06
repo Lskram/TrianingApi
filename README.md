@@ -1,77 +1,86 @@
-📌 TrianingApi
+# 🛴 Workshop .NET 8 with NextJS14  
 
-RESTful API พัฒนาโดยใช้ .NET 8 (ASP.NET Core Web API)
-โครงการนี้สร้างขึ้นเพื่อการฝึกฝน (Training API) และสามารถนำไปขยายต่อสำหรับงานจริงได้
+RESTful API Training Workshop with **.NET 8** and **NextJS 14**  
 
-🚀 Features
+---
 
-✅ พัฒนาโดยใช้ .NET 8
+## ✈ DAY 1 – เนื้อหาหลัก
+1. แนะนำ .NET Core 8  
+2. การสร้าง .NET 8 Rest API  
 
-✅ โครงสร้างโปรเจ็กต์แบบ Clean & Maintainable
+---
 
-✅ รองรับ appsettings.json สำหรับ config
+## 🔍 .NET Core 8 Overview  
 
-✅ รองรับการทดสอบ API ผ่านไฟล์ .http
+### 🔹 Minimal API  
+**เหมาะกับงานเล็ก / prototype**
+- ✅ โค้ดสั้น กระชับ  
+- ✅ พัฒนาได้รวดเร็ว  
+- ✅ รองรับ async/await  
 
-✅ พร้อมต่อยอดเพิ่ม Authentication / Database / Swagger
+❌ ตัวเลือกการตั้งค่าจำกัด  
+❌ ไม่เหมาะกับ API ขนาดใหญ่  
 
-📂 Project Structure
-TrianingApi/
-│── Properties/                # Project metadata
-│── bin/Debug/net8.0/          # Build output
-│── obj/                       # Build objects
-│── ControllAPI.csproj         # Project file
-│── ControllAPI.http           # API test file
-│── ControllAPI.sln            # Solution file
-│── Program.cs                 # Entry point
-│── appsettings.json           # Config file
-│── appsettings.Development.json
-│── README.md                  # Documentation
+---
 
-⚡ Getting Started
-1️⃣ Clone Project
-git clone https://github.com/yourusername/TrianingApi.git
-cd TrianingApi
+### 🔹 Controller-based API  
+**เหมาะกับงานใหญ่ / production**
+- ✅ โครงสร้างชัดเจน  
+- ✅ รองรับ middleware และ unit test  
+- ✅ ปรับแต่งได้หลากหลาย  
 
-2️⃣ Run the API
-dotnet run
+❌ โค้ดยาวและซับซ้อนกว่า  
+❌ พัฒนาได้ช้ากว่า Minimal API  
 
+---
 
-API จะเริ่มทำงานที่:
-👉 https://localhost:5001
-👉 http://localhost:5000
+## 🚀 การสร้าง .NET 8 REST API  
 
-🛠️ Requirements
+### ✅ Minimal API
+```bash
+dotnet new webapi -o MinimalAPI
+✅ Controller-based API
+dotnet new webapi --use-controllers -o ControllerAPI
 
-.NET 8 SDK
+✅ Run Project
+dotnet watch run
 
-Visual Studio / VS Code
+👨‍💻 ตัวอย่าง Controller-based API
+📌 Model: User
+namespace WebApi.Models;
+public class User {
+    public int Id { get; set; }
+    public required string Username { get; set; }
+    public required string Email { get; set; }
+    public required string Fullname { get; set; }
+}
 
-📖 Usage Example
+📌 Controller: UserController
+using Microsoft.AspNetCore.Mvc;
+using WebApi.Models;
 
-ทดสอบ API ได้ผ่านไฟล์ ControllAPI.http หรือใช้ Postman / curl
+namespace WebApi.Controllers;
 
-GET https://localhost:5001/api/values
-Accept: application/json
+[ApiController]
+[Route("api/[controller]")]
+public class UserController : ControllerBase {
 
-🌱 Next Steps
+    [HttpGet]
+    public ActionResult<List<User>> GetUsers() {
+        var users = new List<User> {
+            new User { Id = 1, Username = "john", Email = "john@email.com", Fullname = "John Doe" },
+            new User { Id = 2, Username = "samit", Email = "samit@email.com", Fullname = "Samit Koyom" }
+        };
+        return Ok(users);
+    }
+}
 
- เพิ่ม Swagger UI
+🎯 สรุป
 
- เพิ่ม Database (EF Core / Dapper)
+.NET 8 มี 2 รูปแบบการสร้าง API → Minimal API และ Controller-based API
 
- เพิ่ม Authentication (JWT)
+Minimal API → โค้ดสั้น เหมาะกับงานเล็ก
 
- เพิ่ม Unit Tests
+Controller-based API → โครงสร้างชัดเจน เหมาะกับงานใหญ่
 
-👨‍💻 Author
-
-Developed by Your Name
-
-✉️ Contact: your-email@example.com
-
-🌐 GitHub: yourusername
-
-📜 License
-
-This project is licensed under the MIT License – feel free to use and modify.
+ตัวอย่าง UserController แสดงการสร้าง API ง่าย ๆ
