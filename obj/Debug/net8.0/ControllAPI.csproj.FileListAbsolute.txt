@@ -30,3 +30,4 @@ D:\mk\ControllAPI\obj\Debug\net8.0\refint\ControllAPI.dll
 D:\mk\ControllAPI\obj\Debug\net8.0\ControllAPI.pdb
 D:\mk\ControllAPI\obj\Debug\net8.0\ControllAPI.genruntimeconfig.cache
 D:\mk\ControllAPI\obj\Debug\net8.0\ref\ControllAPI.dll
+D:\mk\ControllAPI\obj\Debug\net8.0\ControllAPI.sourcelink.json
