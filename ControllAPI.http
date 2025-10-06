@@ -1,6 +1,6 @@
-@ControllAPI_HostAddress = http://localhost:5091
+@ControllAPI_HostAddress = http://localhost:5091/api
 
-GET {{ControllAPI_HostAddress}}/api/User/
+GET {{ControllAPI_HostAddress}}/User/
 Accept: application/json
 
 ###

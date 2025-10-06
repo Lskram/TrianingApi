@@ -7,14 +7,11 @@ namespace ControllAPI.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
+
     {
-        // GET: api/User
-        [HttpGet]
-        public ActionResult<List<User>> GetUsers()
+        private static readonly List<User> _users = new List<User>
         {
-            var users = new List<User>
-            {
-                new User
+            new User
                 {
                     Id = 1,
                     Username = "JohnDoe",
@@ -23,21 +20,31 @@ namespace ControllAPI.Controllers
                 },
                 new User
                 {
-                    Id = 1,
+                    Id = 2,
                     Username = "Samit",
                     Email = "Samit@gmail.com",
                     FullName = "Samit Doe",
                 },
                 new User
                 {
-                    Id = 1,
+                    Id = 3,
                     Username = "Chana",
                     Email = "Chana@gmail.com",
                     FullName = "Chana Doe",
                 }
-            };
+        };
+        //Get all users
+        // GET: api/User
+        [HttpGet]
+        public ActionResult<IEnumerable<User>> GetUsers()
+        {
+            foreach (var user in _users)
+            {
+                Console.WriteLine($"{user.Id}, {user.Username}");
+            }
 
-            return Ok(users);
+            return Ok(_users);
         }
     }
+    
 }
