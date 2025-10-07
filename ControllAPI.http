@@ -1,6 +1,36 @@
 @ControllAPI_HostAddress = http://localhost:5091/api
 
+// Get all users
 GET {{ControllAPI_HostAddress}}/User/
 Accept: application/json
 
 ###
+// Get user by ID
+GET {{ControllAPI_HostAddress}}/User/4
+Accept: application/json
+
+###
+// Create a new user
+POST {{ControllAPI_HostAddress}}/User
+Content-Type: application/json
+Accept: application/json
+
+{
+    "id": 6,
+  "Username": "Fove Doe",
+  "Email": "Fove.doe@example.com",
+  "FullName": "Fove Doe"
+}
+
+###
+// Update user
+PUT {{ControllAPI_HostAddress}}/User/5
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": 5,
+  "Username": "somsuk Haa",
+  "Email": "somsuk.haa@example.com",
+  "FullName": "Somsuk Haa Updated"
+}
