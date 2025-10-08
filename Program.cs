@@ -22,4 +22,22 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+try
+{
+    // Allow port override through environment variable
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "5091";
+    builder.WebHost.UseUrls($"http://localhost:{port}");
+    
+    app.Run();
+}
+catch (IOException ex) when (ex.Message.Contains("address already in use"))
+{
+    var currentPort = Environment.GetEnvironmentVariable("PORT") ?? "5091";
+    Console.WriteLine($"Error: Port {currentPort} is already in use. Try setting a different port using the PORT environment variable.");
+    Environment.Exit(1);
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Error starting the application: {ex.Message}");
+    Environment.Exit(1);
+}

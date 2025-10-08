@@ -77,6 +77,10 @@ namespace ControllAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, [FromBody] User user)
         {
+            if (user == null)
+            {
+                return BadRequest("หดหู่ว่ะ");
+            }
             //validate user id
             if (id != user.Id)
             {
@@ -92,23 +96,23 @@ namespace ControllAPI.Controllers
             existingUser.Username = user.Username;
             existingUser.Email = user.Email;
             existingUser.FullName = user.FullName;
-
+            
             // Return updated user
             return Ok(existingUser);
         }
-        // //Delete user by id
-        // // DELETE: api/User/1
-        // [HttpDelete("{id}")]
-        // public ActionResult DeleteUser(int id)
-        // {
-        //     var user = _users.FirstOrDefault(u => u.Id == id);
-        //     if (user == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     _users.Remove(user);
-        //     return NoContent();
-        // }
+        //Delete user by id
+        // DELETE: api/User/1
+        [HttpDelete("{id}")]
+        public ActionResult DeleteUser(int id)
+        {
+            var user = _users.FirstOrDefault(u => u.Id == id);
+            if (user == null)
+            {
+                return NotFound("ไม่มีไรให้ลบอ่ะ ลองเช็คดูใหม่");
+            }
+            _users.Remove(user);
+            return NoContent();
+        }
 
 
     }

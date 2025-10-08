@@ -24,13 +24,18 @@ Accept: application/json
 
 ###
 // Update user
-PUT {{ControllAPI_HostAddress}}/User/5
+PUT {{ControllAPI_HostAddress}}/User/3
 Content-Type: application/json
 Accept: application/json
 
 {
-  "id": 5,
+  "id": 3,
   "Username": "somsuk Haa",
   "Email": "somsuk.haa@example.com",
   "FullName": "Somsuk Haa Updated"
 }
+
+###
+// Delete user
+DELETE {{ControllAPI_HostAddress}}/User/3
+Accept: application/json
